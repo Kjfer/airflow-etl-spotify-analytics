@@ -1,0 +1,93 @@
+# Ignore data folders and raw parquet files (do not commit large artifacts)
+raw/
+data/
+processed/
+
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtualenvs
+venv/
+.venv/
+env/
+ENV/
+venv.bak/
+
+# Environment files
+.env
+.env.*
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Pytest cache
+.pytest_cache/
+
+# Logs
+*.log
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+
+# Temporary files
+*.swp
+*~
+
+# Docker compose override files (local)
+docker-compose.override.yml
+
+# Ignore local notebook checkpoints and outputs
+*.ipynb
+
+# Notes: keep repo small by not committing raw parquet parts or generated data
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+/data/
+/processed/
+/raw/
+
+
+# Virtual envs
+venv/
+.venv/
+env/
+ENV/
+
+# Pytest
+.pytest_cache/
+
+# Environment variables / secrets
+.env
+.env.*
+secrets.env
+
+# Data and outputs (do not commit generated files)
+data/
+logs/
+
+# Docker
+docker-compose.override.yml
+**/Dockerfile
+
+# Airflow local DB / sqlite
+airflow.db
+
+
+
