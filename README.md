@@ -102,33 +102,3 @@ python -c "from layer.gold_layer import gold_transform; print(gold_transform())"
 docker-compose build
 docker-compose up -d
 ```
-
-10) Troubleshooting común
-- Error pip install por falta de headers / compilador: añade dependencias de sistema al `Dockerfile` (ej. `build-essential`, `libpq-dev`, `libxml2-dev`) y reconstruye.
-- Volúmenes en Windows: si ves errores de permisos, crea las carpetas locales manualmente (`dags`, `logs`, `plugins`) y asegúrate de que Docker Desktop tiene acceso al disco.
-- Si Airflow no muestra DAGs: revisa que `dags` esté mapeado correctamente en `docker-compose.yaml` y que el archivo tenga sintaxis válida y esté en la ruta correcta.
-
-11) Buenas prácticas y próximos pasos
-- Hacer determinista el paso de artefactos entre tareas del DAG usando XComs o `op_kwargs` (actualmente las funciones buscan el archivo más reciente en `data/silver`).
-- Añadir validaciones de esquema (`pandera`) y pruebas unitarias para las transformaciones.
-- Añadir CI que construya la imagen y ejecute pruebas.
-
-Si quieres, puedo:
-- (A) Añadir un `Dockerfile` aquí con dependencias de sistema listadas listo para usar.  
-- (B) Modificar `docker-compose.yaml` para usar `image:` + `build:` consistentemente o dejar instrucciones para usar `_PIP_ADDITIONAL_REQUIREMENTS`.
-- (C) Añadir comandos de ejemplo para Windows que creen el `Dockerfile` automáticamente.
-
----
-
-Archivo de referencia rápido (ejemplo de `Dockerfile` para copiar):
-```dockerfile
-FROM apache/airflow:2.7.1
-USER root
-COPY requirements.txt /requirements.txt
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential libpq-dev libxml2-dev libxslt1-dev ca-certificates && \
-    pip install --upgrade pip && pip install --no-cache-dir -r /requirements.txt
-USER airflow
-```
-
-Gracias — dime si quieres que yo cree el `Dockerfile` automáticamente o pruebe levantar el stack desde aquí.

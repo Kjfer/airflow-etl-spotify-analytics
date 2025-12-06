@@ -1,5 +1,5 @@
 # Ignore data folders and raw parquet files (do not commit large artifacts)
-raw/
+
 data/
 processed/
 
